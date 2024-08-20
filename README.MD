@@ -3,7 +3,7 @@ SuperChat2
 
 ***От создателей Chat и SuperChat (версии, которым было не суждено увидеть свет)***
 ***
-![screen](http://webdesign.ru.net/images/Heydon_min.jpg)
+![screen](https://github.com/dmitryhatsayuk/SuperChat2/blob/main/screen.JPG)
 
 Приложение для многопользовательской переписки в стиле чата в локальной сети через консоль. Работает на базе одного сервера MultiThreadServer и нескольких клиентов Client (количество ограниченно до 50-не проверено, тестировалось максимум 3).
 
