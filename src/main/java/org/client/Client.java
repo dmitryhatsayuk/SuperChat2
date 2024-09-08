@@ -5,10 +5,10 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    ClientLogger clientLogger = new ClientLogger();
+    private final ClientLogger clientLogger = new ClientLogger();
     String settings = "src/main/java/org/client/settings.txt";
-    final Socket socket = socketMaker(settings);
-    String name;
+    private final Socket socket = socketMaker(settings);
+    private String name;
 
 
     public Client() throws IOException {
@@ -46,10 +46,12 @@ public class Client {
         Scanner msgScanner = new Scanner(System.in);
         try {
             while (true) {
-                PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
+                String outMsg;
+                try (PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true)) {
 
-                String outMsg = msgScanner.nextLine();
-                printWriter.println("[" + name + "]" + outMsg);
+                    outMsg = msgScanner.nextLine();
+                    printWriter.println("[" + name + "]" + outMsg);
+                }
                 clientLogger.log("USR", "Snd msg " + outMsg);
                 if (outMsg.contains("exit")) {
                     Thread.sleep(100);
@@ -61,6 +63,7 @@ public class Client {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+
     };
 
     public Socket socketMaker(String file) throws IOException {

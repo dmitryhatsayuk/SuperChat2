@@ -2,13 +2,10 @@ package org.client;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.server.ServerLogger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ClientLoggerTest {
 

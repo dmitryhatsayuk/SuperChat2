@@ -13,29 +13,29 @@ class MultiThreadServerTest {
     @Test
     void start() throws InterruptedException {
         MultiThreadServer multiThreadServer = new MultiThreadServer();
-        multiThreadServer.settings="src/test/java/org/server/testPortSettings.txt";
+        multiThreadServer.settings = "src/test/java/org/server/testPortSettings.txt";
 
-        Runnable server =()->{
-    try {
-        multiThreadServer.start();
-    } catch (IOException e) {
-        throw new RuntimeException(e);
-    }
-};
-Runnable client =()->{
-        try (Socket socket = new Socket("localhost", 1)) {
-            new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))).println("HELLO");
-            new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
-         String inMsg = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
-         Assertions.assertEquals("HELLO",inMsg);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-};
+        Runnable server = () -> {
+            try {
+                multiThreadServer.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
+        Runnable client = () -> {
+            try (Socket socket = new Socket("localhost", 1)) {
+                new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))).println("HELLO");
+                new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
+                String inMsg = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
+                Assertions.assertEquals("HELLO", inMsg);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
 
-new Thread(server).start();
-Thread.sleep(2000);
-new Thread(client).start();
+        new Thread(server).start();
+        Thread.sleep(2000);
+        new Thread(client).start();
 
     }
 
@@ -58,18 +58,19 @@ new Thread(client).start();
         };
 
         Runnable receiving = () -> {
-            try (Socket socket = new Socket("localhost", 1);Socket anotherSocket = new Socket("localhost",1)) {
-                String  allMsg = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
-                String newMsg = allMsg.substring(0,30);
+            try (Socket socket = new Socket("localhost", 1); Socket anotherSocket = new Socket("localhost", 1)) {
+                String allMsg = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
+                String newMsg = allMsg.substring(0, 30);
                 Assertions.assertEquals("Добро пожаловать  в SuperChat.", newMsg);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         };
-        Thread send = new Thread(sending,"send");
+        Thread send = new Thread(sending, "send");
 
         Thread receive = new Thread(receiving);
-        send.start();receive.start();
+        send.start();
+        receive.start();
 
     }
 
@@ -92,15 +93,16 @@ new Thread(client).start();
 
         Runnable receiving = () -> {
             try (Socket socket = new Socket("localhost", 1)) {
-                String  allMsg = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
-                Assertions.assertEquals("Пользователь ID "+Thread.currentThread().threadId()+" покинул чат", allMsg);
+                String allMsg = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
+                Assertions.assertEquals("Пользователь ID " + Thread.currentThread().threadId() + " покинул чат", allMsg);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         };
         Thread send = new Thread(sending);
         Thread receive = new Thread(receiving);
-        send.start();receive.start();
+        send.start();
+        receive.start();
 
     }
 
@@ -114,7 +116,7 @@ new Thread(client).start();
                 Socket secondSender = serverSocket.accept();
                 sockets.add(firstSender);
                 sockets.add(secondSender);
-                multiThreadServer.allWriter(sockets,firstSender,"HELLO");
+                multiThreadServer.allWriter(sockets, firstSender, "HELLO");
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -122,8 +124,8 @@ new Thread(client).start();
         };
 
         Runnable receiving = () -> {
-            try (Socket socket = new Socket("localhost", 1);Socket anotherSocket = new Socket("localhost",1)) {
-                String  allMsg = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
+            try (Socket socket = new Socket("localhost", 1); Socket anotherSocket = new Socket("localhost", 1)) {
+                String allMsg = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine();
                 Assertions.assertEquals(allMsg, "HELLO");
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -131,7 +133,8 @@ new Thread(client).start();
         };
         Thread send = new Thread(sending);
         Thread receive = new Thread(receiving);
-        send.start();receive.start();
+        send.start();
+        receive.start();
 
     }
 

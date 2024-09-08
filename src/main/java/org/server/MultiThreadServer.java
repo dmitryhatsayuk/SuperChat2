@@ -10,9 +10,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 class MultiThreadServer {
-    ExecutorService threadPool = Executors.newFixedThreadPool(50);
-    LinkedList<Socket> sockets = new LinkedList<>();
-    String settings = "src/main/java/org/server/settings.txt";
+    private final ExecutorService threadPool = Executors.newFixedThreadPool(50);
+    private final LinkedList<Socket> sockets = new LinkedList<>();
+    protected String settings = "src/main/java/org/server/settings.txt";
     ServerLogger serverLogger = new ServerLogger();
 
     public void start() throws IOException {
@@ -56,28 +56,31 @@ class MultiThreadServer {
     //методы сервера-пиши при входе, пиши при выходе, пиши всем, читай
 
     public void helloWriter(Socket clientSocket) throws IOException {
-        PrintWriter helloWriter = new PrintWriter(clientSocket.getOutputStream(), true);
-        helloWriter.println("Добро пожаловать  в SuperChat. Ваш текущий ID:" + Thread.currentThread().threadId());
+        try (PrintWriter helloWriter = new PrintWriter(clientSocket.getOutputStream(), true)) {
+            helloWriter.println("Добро пожаловать  в SuperChat. Ваш текущий ID:" + Thread.currentThread().threadId());
+        }
         serverLogger.log("USR", "User ID" + Thread.currentThread().threadId() + " was connected");
     }
 
     public void exitWriter(LinkedList<Socket> sockets) throws IOException {
         for (Socket socket : sockets) {
-            PrintWriter exitWriter = new PrintWriter(socket.getOutputStream(), true);
-            exitWriter.println("Пользователь ID " + Thread.currentThread().threadId() + " покинул чат\n");
+            try (PrintWriter exitWriter = new PrintWriter(socket.getOutputStream(), true)) {
+                exitWriter.println("Пользователь ID " + Thread.currentThread().threadId() + " покинул чат\n");
+            }
             serverLogger.log("USR", "User id" + Thread.currentThread().threadId() + " was left");
         }
     }
 
     public void allWriter(LinkedList<Socket> sockets, Socket clientSocket, String msg) throws IOException {
         for (Socket socket : sockets) {
-            PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
-            if (sockets.size() <= 1) {
-                printWriter.println("В чате пока никого нет, ваше сообщение не будет отправлено\n");
-                serverLogger.log("SYS", "No msg sent because one client");
-            } else if (clientSocket != socket) {
-                printWriter.println("|ID" + Thread.currentThread().threadId() + "|" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + " " + msg);
-                serverLogger.log("USR", "Sent msg from Thrd" + Thread.currentThread().threadId() + ":" + msg);
+            try (PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true)) {
+                if (sockets.size() <= 1) {
+                    printWriter.println("В чате пока никого нет, ваше сообщение не будет отправлено\n");
+                    serverLogger.log("SYS", "No msg sent because one client");
+                } else if (clientSocket != socket) {
+                    printWriter.println("|ID" + Thread.currentThread().threadId() + "|" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + " " + msg);
+                    serverLogger.log("USR", "Sent msg from Thrd" + Thread.currentThread().threadId() + ":" + msg);
+                }
             }
 
         }
@@ -90,10 +93,11 @@ class MultiThreadServer {
     }
 
     public Integer portReader(String file) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-        Integer port = Integer.parseInt(bufferedReader.readLine());
-        serverLogger.log("SYS", "Read port:" + port);
-        bufferedReader.close();
+        Integer port;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            port = Integer.parseInt(bufferedReader.readLine());
+            serverLogger.log("SYS", "Read port:" + port);
+        }
         return port;
     }
 }

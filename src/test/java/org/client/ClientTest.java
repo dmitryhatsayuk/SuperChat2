@@ -2,12 +2,9 @@ package org.client;
 
 import org.junit.jupiter.api.Assertions;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 class ClientTest {
 
@@ -15,8 +12,8 @@ class ClientTest {
     void start() throws IOException {
         Client client = new Client();
         client.settings = "src/test/java/org/client/clientsettings.txt";
-new Thread(client.msgSender);
-new Thread(client.msgReader);
+        new Thread(client.msgSender);
+        new Thread(client.msgReader);
 
     }
 

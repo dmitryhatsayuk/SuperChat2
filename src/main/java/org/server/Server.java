@@ -11,7 +11,7 @@ public class Server {
     public final int port = 435;
     //portreader("path");
 
-    ServerSocket serverSocket = new ServerSocket(port);
+    public final ServerSocket serverSocket = new ServerSocket(port);
 
     public Server() throws IOException {
     }
@@ -32,8 +32,9 @@ public class Server {
 
 
     public void send(Socket clientSocket, String msg) throws IOException {
-        PrintWriter printWriter = new PrintWriter(clientSocket.getOutputStream(), true);
-        printWriter.println(msg);
+        try (PrintWriter printWriter = new PrintWriter(clientSocket.getOutputStream(), true)) {
+            printWriter.println(msg);
+        }
         System.out.println("Send " + msg);
 
     }
