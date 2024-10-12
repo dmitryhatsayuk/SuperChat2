@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Client {
     private final ClientLogger clientLogger = new ClientLogger();
-    String settings = "src/main/java/org/client/settings.txt";
+    String settings = "src/main/resources/ClientSettings.txt";
     private final Socket socket = socketMaker(settings);
     private String name;
 

@@ -1,0 +1,37 @@
+[SYS]2024-10-13T00:01:16.995947:TEST TEXT
+[USR]2024-10-13T00:01:17.012877:ANOTHER TEXT
+[SYS]2024-10-13T00:03:19.317668:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:03:19.413626:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:03:19.417209:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:03:44.217964:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:03:44.310521:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:03:44.314057:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:05:29.420749:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:05:29.512494:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:05:29.518084:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:10:31.524997:TEST TEXT
+[USR]2024-10-13T00:10:31.541097:ANOTHER TEXT
+[SYS]2024-10-13T00:10:51.273280:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:10:51.356261:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:10:51.359419:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:16:19.100491:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:16:19.185022:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:16:19.187985:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:16:33.440587:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:16:33.530353:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:16:33.534497:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:16:42.552521:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:16:57.221899:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:18:02.227277:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:18:02.266607:Soket opened
+[SYS]2024-10-13T00:20:55.730784:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:21:10.196496:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:21:37.594495:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:21:37.614580:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:21:45.219961:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:21:45.309104:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:21:45.312810:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:24:51.545847:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:24:58.947216:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:25:24.066536:Read IP:localhost Read port:1
+[SYS]2024-10-13T00:25:34.304057:Read IP:localhost Read port:1

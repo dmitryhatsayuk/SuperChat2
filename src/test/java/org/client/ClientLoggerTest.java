@@ -13,10 +13,10 @@ class ClientLoggerTest {
     void log() throws IOException {
 
         ClientLogger logger = new ClientLogger();
-        logger.filePath = "src/test/java/org/client/clientlog.txt";
+        logger.filePath = "src/main/resources/clientlog.txt";
         logger.log("SYS", "TEST TEXT");
         logger.log("USR", "ANOTHER TEXT");
-        BufferedReader reader = new BufferedReader(new FileReader("src/test/java/org/client/clientlog.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/clientlog.txt"));
         String firstMsg = reader.readLine();
         String secondMsg = reader.readLine();
         Boolean correct = secondMsg.contains("ANOTHER TEXT");

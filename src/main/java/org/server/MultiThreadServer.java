@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 class MultiThreadServer {
     private final ExecutorService threadPool = Executors.newFixedThreadPool(50);
     private final LinkedList<Socket> sockets = new LinkedList<>();
-    protected String settings = "src/main/java/org/server/settings.txt";
+    protected String settings = "src/main/resources/ServerSettings.txt";
     ServerLogger serverLogger = new ServerLogger();
 
     public void start() throws IOException {

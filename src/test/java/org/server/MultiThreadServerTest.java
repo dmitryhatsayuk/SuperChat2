@@ -13,7 +13,7 @@ class MultiThreadServerTest {
     @Test
     void start() throws InterruptedException {
         MultiThreadServer multiThreadServer = new MultiThreadServer();
-        multiThreadServer.settings = "src/test/java/org/server/testPortSettings.txt";
+        multiThreadServer.settings = "src/main/resources/ServerSettings.txt";
 
         Runnable server = () -> {
             try {
